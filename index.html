@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uma Surpresa para Você</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Efeito de brilho suave para textos */
+        .text-glow {
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.3), 0 0 10px rgba(236, 72, 153, 0.2);
+        }
+        /* Animações de entrada */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Estilização do botão inicial */
+        #startButton {
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(219, 39, 119, 0.4), 0 0 25px rgba(219, 39, 119, 0.3);
+        }
+        #startButton:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(219, 39, 119, 0.6), 0 0 40px rgba(219, 39, 119, 0.4);
+        }
+        /* Canvas para o efeito de partículas */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Fica atrás de todo o conteúdo */
+            pointer-events: none; /* Permite clicar através do canvas */
+        }
+        .photo-frame {
+            border: 4px solid white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            padding: 8px;
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+
+    <!-- Tela Inicial com o Botão -->
+    <div id="initial-screen" class="h-screen w-full flex items-center justify-center bg-gray-900 fixed top-0 left-0 z-50">
+        <button id="startButton" class="bg-pink-600 text-white font-bold text-xl py-4 px-8 rounded-full shadow-lg hover:bg-pink-700">
+            Saiba mais...
+        </button>
+    </div>
+
+    <!-- Canvas para Partículas -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Conteúdo Principal da Homenagem (inicialmente oculto) -->
+    <main id="main-content" class="hidden opacity-0 transition-opacity duration-1000">
+        
+        <!-- Seção Principal -->
+        <header class="h-screen flex flex-col items-center justify-center text-center p-6 relative reveal">
+            <div class="absolute inset-0 bg-black opacity-40"></div>
+            <div class="relative z-10">
+                <h1 class="text-5xl md:text-7xl font-bold text-glow">Feliz 5 Anos, Meu Amor!</h1>
+                <p class="mt-4 text-lg md:text-xl max-w-2xl text-gray-200">Para a pessoa que transformou minha vida. Estes foram os melhores 5 anos que eu poderia imaginar.</p>
+                <div class="mt-8 text-2xl animate-bounce">
+                    &#x2193; <!-- Seta para baixo -->
+                </div>
+            </div>
+        </header>
+
+        <!-- Nossa História -->
+        <section class="py-20 px-6 container mx-auto">
+            <div class="text-center mb-12 reveal">
+                <h2 class="text-4xl md:text-5xl font-bold text-glow text-pink-400">Nossa Jornada Inesquecível</h2>
+                <p class="mt-4 text-gray-300">Uma pequena viagem pelas nossas memórias.</p>
+            </div>
+
+            <!-- Linha do Tempo -->
+            <div class="space-y-12">
+                <!-- Item 1: O Início -->
+                <div class="flex flex-col md:flex-row items-center reveal">
+                    <div class="md:w-1/2 p-4">
+                        <h3 class="text-3xl font-bold text-pink-300 mb-3">O Começo de Tudo</h3>
+                        <p class="text-gray-300 leading-relaxed">
+                            <!-- EDITE AQUI -->
+                            Lembro como se fosse hoje do dia em que nos conhecemos. Mal sabia eu que aquele momento mudaria tudo. Seu sorriso, seu jeito... tudo me encantou desde o primeiro instante.
+                        </p>
+                    </div>
+                    <div class="md:w-1/2 p-4 flex justify-center">
+                         <!-- EDITE AQUI: Coloque o link de uma foto do início -->
+                        <img src="https://i.imgur.com/lzvdKPE.jpeg" alt="Foto do início do namoro" class="rounded-lg shadow-2xl photo-frame w-full max-w-sm">
+                    </div>
+                </div>
+
+                 <!-- Item 3: Momentos Especiais -->
+                 <div class="flex flex-col md:flex-row items-center reveal">
+                    <div class="md:w-1/2 p-4">
+                        <h3 class="text-3xl font-bold text-pink-300 mb-3">Construindo a Vida Juntos</h3>
+                        <p class="text-gray-300 leading-relaxed">
+                            <!-- EDITE AQUI -->
+                            Passamos por tantos momentos, desafios e conquistas. Cada um deles nos tornou mais fortes e unidos. Agradeço por ter você ao meu lado em cada passo, me apoiando e me fazendo uma pessoa melhor.
+                        </p>
+                    </div>
+                    <div class="md:w-1/2 p-4 flex justify-center">
+                        <!-- EDITE AQUI: Coloque o link de uma foto importante -->
+                        <img src="https://i.imgur.com/7mca87O.jpeg" alt="Foto de um momento especial" class="rounded-lg shadow-2xl photo-frame w-full max-w-sm">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5 Motivos -->
+        <section class="py-20 px-6 bg-gray-800">
+            <div class="container mx-auto text-center">
+                <div class="reveal">
+                    <h2 class="text-4xl md:text-5xl font-bold text-glow text-pink-400">5 Anos, 5 Motivos (de infinitos)</h2>
+                    <p class="mt-4 text-gray-300 max-w-2xl mx-auto">Tentar resumir meu amor em palavras é impossível, mas aqui estão algumas razões...</p>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+                    <!-- Motivo 1 -->
+                    <div class="bg-gray-900 p-6 rounded-lg shadow-xl transform hover:scale-105 transition-transform duration-300 reveal">
+                        <h3 class="text-2xl font-bold text-pink-300">Seu Companheirismo</h3>
+                        <p class="mt-2 text-gray-400"><!-- EDITE AQUI -->Você é minha melhor amiga, minha confidente e meu porto seguro. Saber que posso contar com você para tudo não tem preço.</p>
+                    </div>
+                    <!-- Motivo 2 -->
+                    <div class="bg-gray-900 p-6 rounded-lg shadow-xl transform hover:scale-105 transition-transform duration-300 reveal" style="transition-delay: 100ms;">
+                        <h3 class="text-2xl font-bold text-pink-300">Sua Alegria</h3>
+                        <p class="mt-2 text-gray-400"><!-- EDITE AQUI -->Sua risada ilumina meus dias. Você tem o dom de tornar os momentos mais simples em algo extraordinário e divertido.</p>
+                    </div>
+                    <!-- Motivo 3 -->
+                    <div class="bg-gray-900 p-6 rounded-lg shadow-xl transform hover:scale-105 transition-transform duration-300 reveal" style="transition-delay: 200ms;">
+                        <h3 class="text-2xl font-bold text-pink-300">Sua Força</h3>
+                        <p class="mt-2 text-gray-400"><!-- EDITE AQUI -->Admiro a forma como você enfrenta os desafios. Sua determinação me inspira a ser mais forte todos os dias.</p>
+                    </div>
+                    <!-- Motivo 4 -->
+                     <div class="bg-gray-900 p-6 rounded-lg shadow-xl transform hover:scale-105 transition-transform duration-300 reveal md:col-start-1 lg:col-start-auto" style="transition-delay: 300ms;">
+                        <h3 class="text-2xl font-bold text-pink-300">Seu Carinho</h3>
+                        <p class="mt-2 text-gray-400"><!-- EDITE AQUI -->Seu abraço é o meu lugar preferido no mundo. O jeito que você cuida de mim me faz sentir a pessoa mais amada do universo.</p>
+                    </div>
+                    <!-- Motivo 5 -->
+                     <div class="bg-gray-900 p-6 rounded-lg shadow-xl transform hover:scale-105 transition-transform duration-300 reveal" style="transition-delay: 400ms;">
+                        <h3 class="text-2xl font-bold text-pink-300">Nosso Futuro</h3>
+                        <p class="mt-2 text-gray-400"><!-- EDITE AQUI -->Amo sonhar com nosso futuro, planejar nossas próximas viagens e imaginar nossa vida juntos. Mal posso esperar pelo que vem aí.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mensagem Final -->
+        <footer class="py-20 px-6 text-center">
+            <div class="container mx-auto reveal">
+                <h2 class="text-4xl font-bold text-glow">Para Mozi Mozi</h2>
+                <p class="mt-6 max-w-3xl mx-auto text-lg text-gray-300 leading-relaxed">
+                    <!-- EDITE AQUI COM SUA MENSAGEM FINAL -->
+                    Meu amor, estes 5 anos foram só o começo. Cada dia ao seu lado é um presente, e meu amor por você só cresce. Obrigado por ser exatamente quem você é. Que venham mais 5, 10, 50 anos de muito amor, parceria e felicidade.
+                    <br><br>
+                    Eu te amo mais do que as palavras podem dizer.
+                    <br><br>
+                    Com todo o meu amor,
+                    <br>
+                    <span class="font-bold text-pink-400 text-2xl mt-2 block">MOZI</span>
+                </p>
+            </div>
+        </footer>
+
+    </main>
+
+    <script>
+        // Lógica para o botão inicial e animações
+        document.addEventListener('DOMContentLoaded', () => {
+            const startButton = document.getElementById('startButton');
+            const initialScreen = document.getElementById('initial-screen');
+            const mainContent = document.getElementById('main-content');
+
+            startButton.addEventListener('click', () => {
+                initialScreen.style.opacity = '0';
+                initialScreen.style.transition = 'opacity 0.5s ease';
+                
+                setTimeout(() => {
+                    initialScreen.style.display = 'none';
+                    mainContent.style.display = 'block';
+                    setTimeout(() => {
+                        mainContent.style.opacity = '1';
+                        // Ativa a primeira animação de revelação manualmente
+                        document.querySelector('.reveal').classList.add('visible');
+                    }, 50); // Pequeno delay para garantir a transição
+                }, 500);
+            });
+
+            // Animações de scroll
+            const revealElements = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1 // Ativa quando 10% do elemento estiver visível
+            });
+
+            revealElements.forEach(el => {
+                observer.observe(el);
+            });
+        });
+
+        // Lógica para o efeito de partículas
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let particlesArray = [];
+        const mouse = { x: null, y: null };
+        const touch = { x: null, y: null };
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Eventos para mouse
+        window.addEventListener('mousemove', (event) => {
+            mouse.x = event.x;
+            mouse.y = event.y;
+            createParticles(mouse.x, mouse.y);
+        });
+        
+        // Eventos para toque (celular)
+        window.addEventListener('touchmove', (event) => {
+             if (event.touches.length > 0) {
+                touch.x = event.touches[0].clientX;
+                touch.y = event.touches[0].clientY;
+                createParticles(touch.x, touch.y);
+            }
+        });
+         window.addEventListener('touchstart', (event) => {
+             if (event.touches.length > 0) {
+                touch.x = event.touches[0].clientX;
+                touch.y = event.touches[0].clientY;
+                createParticles(touch.x, touch.y);
+            }
+        });
+
+        class Particle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 4 + 1;
+                this.speedX = Math.random() * 2 - 1;
+                this.speedY = Math.random() * 2 - 1;
+                this.color = `rgba(236, 72, 153, ${Math.random()})`; // Tons de rosa com opacidade variada
+                this.life = 0;
+                this.maxLife = Math.random() * 100 + 50; // Tempo de vida da partícula
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                this.size *= 0.97; // Diminui com o tempo
+                this.life++;
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function createParticles(x, y) {
+            // Cria um número limitado de partículas para não sobrecarregar
+            if (particlesArray.length < 100) {
+                for (let i = 0; i < 2; i++) {
+                    particlesArray.push(new Particle(x, y));
+                }
+            }
+        }
+
+        function handleParticles() {
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+                if (particlesArray[i].size <= 0.2 || particlesArray[i].life > particlesArray[i].maxLife) {
+                    particlesArray.splice(i, 1);
+                    i--;
+                }
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            handleParticles();
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+</html>
+
+
+
